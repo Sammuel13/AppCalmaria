@@ -52,6 +52,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.layoutbasico.ui.theme.LayoutBasicoTheme
 
 class MainActivity : ComponentActivity() {
@@ -236,7 +240,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
 // Navegacao
 @Composable
-private fun AppNavBar(modifier: Modifier = Modifier) {
+private fun AppNavBar(modifier: Modifier = Modifier, navController: NavController) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surfaceVariant,
         modifier = modifier
@@ -252,7 +256,9 @@ private fun AppNavBar(modifier: Modifier = Modifier) {
                 Text(stringResource(R.string.bottom_navigation_home))
             },
             selected = true,
-            onClick = {}
+            onClick = {
+                navController.navigate("home")
+            }
         )
         NavigationBarItem(
             icon = {
@@ -265,7 +271,29 @@ private fun AppNavBar(modifier: Modifier = Modifier) {
                 Text(stringResource(R.string.bottom_navigation_profile))
             },
             selected = false,
-            onClick = {}
+            onClick = {
+                navController.navigate("profile")
+            }
+        )
+    }
+}
+
+@Composable
+fun ProfileScreen(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            imageVector = Icons.Default.AccountCircle,
+            contentDescription = null,
+            modifier = Modifier.size(120.dp)
+        )
+        Text(
+            text = "Perfil do Usuário",
+            modifier = Modifier.padding(top = 8.dp)
         )
     }
 }
@@ -274,10 +302,21 @@ private fun AppNavBar(modifier: Modifier = Modifier) {
 @Composable
 fun CalmariaApp() {
     LayoutBasicoTheme {
+        val navController = rememberNavController()
         Scaffold(bottomBar = {
-            AppNavBar()
+            AppNavBar(navController = navController)
         }) { padding ->
-            HomeScreen(Modifier.padding(padding))
+            NavHost(
+                navController = navController,
+                startDestination = "home"
+            ) {
+                composable("home") {
+                    HomeScreen(Modifier.padding(padding))
+                }
+                composable("profile") {
+                    ProfileScreen(Modifier.padding(padding))
+                }
+            }
         }
     }
 }
