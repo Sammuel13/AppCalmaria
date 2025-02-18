@@ -4,11 +4,16 @@ Aplicativo desenvolvido com Jetpack Compose para exibir coleções e categorias 
 
 ## 📸 Screenshots
 
+## Segunda atividade
+### Tela de usuário com navegação pelo footer
+![Profile](screenshots/Profile.png)
+
+## Primeira atividade
 ### App filtrando por "yoga"
 ![App filtrando por yoga](screenshots/AppCalmariaScreenshot.png)
 
 ### Componentes principais
-![Navbar](screenshots/Navbar.png)  
-![LazyGrid](screenshots/LazyGrid.png)  
-![LazyRow](screenshots/LazyRow.png)  
+![NavBar](screenshots/NavBar.png)
+![LazyGrid](screenshots/LazyGrid.png)
+![LazyRow](screenshots/LazyRow.png)
 ![SearchBar](screenshots/SearchBar.png)
